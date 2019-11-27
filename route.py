@@ -132,13 +132,16 @@ def ledger():
         cursor.execute("SELECT * FROM acd_item")
         rows_acd_item = cursor.fetchall()
 
+        cursor.execute("SELECT * FROM acd_item WHERE item_code LIKE 'P%'")
+        rows_acd_item_milk = cursor.fetchall()
+
         cursor.execute("SELECT log_ic_date,item_code,item_name,log_ic_amount,cus_name,cus_phone,act_name FROM acd_log_income LEFT JOIN acd_customer ON cus_code = log_ic_cus_code LEFT JOIN acd_item ON item_code = log_ic_item_code  LEFT JOIN acd_accountant ON act_code = log_ic_act_code ORDER BY log_ic_date DESC")
         rows_acd_log_income = cursor.fetchall()
 
         cursor.execute("SELECT log_exp_date,item_code,item_name,log_exp_amount,sup_company,sup_phone,act_name FROM acd_log_expense LEFT JOIN acd_supplier ON sup_code = log_exp_sup_code LEFT JOIN acd_item ON item_code = log_exp_item_code  LEFT JOIN acd_accountant ON act_code = log_exp_act_code ORDER BY log_exp_date DESC")
         rows_acd_log_expense = cursor.fetchall()
 
-        return render_template('ledger.html',rows_acd_supplier=rows_acd_supplier,rows_acd_customer=rows_acd_customer,rows_acd_accountant=rows_acd_accountant,rows_acd_item=rows_acd_item,rows_acd_log_income=rows_acd_log_income,rows_acd_log_expense=rows_acd_log_expense)
+        return render_template('ledger.html',rows_acd_supplier=rows_acd_supplier,rows_acd_customer=rows_acd_customer,rows_acd_accountant=rows_acd_accountant,rows_acd_item=rows_acd_item,rows_acd_log_income=rows_acd_log_income,rows_acd_log_expense=rows_acd_log_expense,rows_acd_item_milk=rows_acd_item_milk)
 #########################################################################################################################################################################
 #ฟังก์ชันเพิ่มข้อมูล acd_log_income ลงฐานข้อมูล
 @app.route('/log_income_insert',methods=['POST'])
