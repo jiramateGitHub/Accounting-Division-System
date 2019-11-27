@@ -120,10 +120,8 @@
           <a href="" class="btn btn-primary" data-toggle="modal" data-target="#modalinsert">เพิ่มข้อมูล Supplier</a>
           <br><br>
 
-          <!-- Content Row -->
-          <div class="row">
             <!-- DataTales Example -->
-            <div class="card shadow col-md-12">
+            <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">ตารางแสดงข้อมูล Supplier</h6>
                 </div>
@@ -131,7 +129,7 @@
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                             <th>รหัสผู้ผลิต</th>
                             <th>ชื่อผู้ผลิต</th>
                             <th>ชื่อบริษัท</th>
@@ -156,7 +154,7 @@
                                     <a href="" class="btn btn-secondary btn-xs" data-toggle="modal" data-target="#modaledit{{row.0}}"><i class="fas fa-pen-square"></i></a>
                                     <a href="/supplier_delete/{{ row.0 }}" class="btn btn-danger btn-xs" onclick="return confirm('คุณต้องการลบข้อมูลหรือไม่?')"><i class="fas fa-times-circle"></i></a>
                                 </td>
-                                </tr>
+                            </tr>
                                 <div id="modaledit{{row.0}}" class="modal fade" role="dialog">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -226,7 +224,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </tr>
                             {% endfor %}
                         
                         </tbody>
@@ -234,8 +231,6 @@
                     </div>
                 </div>
             </div>
-           
-          </div>
 
         <!-- /.modal insert -->
           <div id="modalinsert" class="modal fade" role="dialog">
