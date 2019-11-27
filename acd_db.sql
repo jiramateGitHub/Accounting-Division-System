@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2019 at 02:30 PM
+-- Generation Time: Nov 27, 2019 at 03:15 PM
 -- Server version: 10.4.8-MariaDB
 -- PHP Version: 7.1.33
 
@@ -127,37 +127,11 @@ INSERT INTO `acd_item` (`item_id`, `item_code`, `item_name`, `item_price`) VALUE
 (25, 'OF1012', 'ลูกแม็ก', 120),
 (26, 'OF1013', 'น้ำยาลบคำผิด', 600),
 (27, 'OF1014', 'เครื่องคิดเลข', 300),
-(28, 'P1001\r\n', 'นมรสออริจินัล\r\n', 490),
-(29, 'P1002\r\n', 'นมรสหวาน\r\n', 450),
-(30, 'P1003\r\n', 'นมรสสตรอเบอรี่\r\n', 450),
-(31, 'P1004\r\n', 'นมรสกล้วย\r\n', 450),
-(32, 'P1005\r\n', 'นมรสช็อกโกแลต\r\n', 450);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `acd_item_detail`
---
-
-CREATE TABLE `acd_item_detail` (
-  `itdt_id` int(11) NOT NULL,
-  `itdt_item_code` varchar(255) NOT NULL,
-  `itdt_code` varchar(255) NOT NULL,
-  `itdt_name` varchar(255) NOT NULL,
-  `itdt_detail` varchar(255) NOT NULL,
-  `itdt_price` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `acd_item_detail`
---
-
-INSERT INTO `acd_item_detail` (`itdt_id`, `itdt_item_code`, `itdt_code`, `itdt_name`, `itdt_detail`, `itdt_price`) VALUES
-(1, 'A1001', 'P1001\r\n', 'นมรสออริจินัล\r\n', 'นมวัว 100%\r\n', 490),
-(2, 'A1001', 'P1002\r\n', 'นมรสหวาน\r\n', 'นมวัว 96% น้ำตาล 4%\r\n', 450),
-(3, 'A1001', 'P1003\r\n', 'นมรสสตรอเบอรี่\r\n', 'นมวัว 94% น้ำตาล 5% ผงสตอเบอรี่ 1%\r\n', 450),
-(4, 'A1001', 'P1004\r\n', 'นมรสกล้วย\r\n', 'นมวัว 94% น้ำตาล 5% ผงกล้วย 1%\r\n', 450),
-(5, 'A1001', 'P1005\r\n', 'นมรสช็อกโกแลต\r\n', 'นมวัว 94% น้ำตาล 5% ผงโกโก้ 1%\r\n', 450);
+(28, 'P1001', 'นมรสออริจินัล', 490),
+(29, 'P1002', 'นมรสหวาน', 450),
+(30, 'P1003', 'นมรสสตรอเบอรี่', 450),
+(31, 'P1004', 'นมรสกล้วย', 450),
+(32, 'P1005', 'นมรสช็อกโกแลต', 450);
 
 -- --------------------------------------------------------
 
@@ -180,7 +154,10 @@ CREATE TABLE `acd_log` (
 --
 
 INSERT INTO `acd_log` (`log_id`, `log_date`, `log_code`, `log_item_code`, `log_act_code`, `log_amount`, `log_type`) VALUES
-(13, '2019-11-20', 'C0001', 'P1004\r\n', 'R001', 200, '1');
+(1, '2019-11-26', 'C0001', 'P1004', 'R001', 4, '1'),
+(2, '2019-11-27', 'C0001', 'P1003', 'R001', 5, '1'),
+(3, '2019-11-20', 'G001', 'A3003', 'R001', 5, '2'),
+(4, '2019-11-20', 'G001', 'P1004', 'R001', 5, '2');
 
 -- --------------------------------------------------------
 
@@ -196,6 +173,14 @@ CREATE TABLE `acd_log_expense` (
   `log_exp_act_code` varchar(255) NOT NULL COMMENT 'พนักงานบัญชี',
   `log_exp_amount` int(11) NOT NULL COMMENT 'จำนวนรายการ'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `acd_log_expense`
+--
+
+INSERT INTO `acd_log_expense` (`log_exp_id`, `log_exp_date`, `log_exp_sup_code`, `log_exp_item_code`, `log_exp_act_code`, `log_exp_amount`) VALUES
+(1, '2019-11-20', 'G001', 'A3003', 'R001', 5),
+(2, '2019-11-20', 'G001', 'P1004', 'R001', 5);
 
 -- --------------------------------------------------------
 
@@ -217,7 +202,8 @@ CREATE TABLE `acd_log_income` (
 --
 
 INSERT INTO `acd_log_income` (`log_ic_id`, `log_ic_date`, `log_ic_cus_code`, `log_ic_item_code`, `log_ic_act_code`, `log_ic_amount`) VALUES
-(9, '2019-11-20', 'C0001', 'P1004\r\n', 'R001', 200);
+(1, '2019-11-26', 'C0001', 'P1004', 'R001', 4),
+(2, '2019-11-27', 'C0001', 'P1003', 'R001', 5);
 
 -- --------------------------------------------------------
 
@@ -270,12 +256,6 @@ ALTER TABLE `acd_item`
   ADD PRIMARY KEY (`item_id`);
 
 --
--- Indexes for table `acd_item_detail`
---
-ALTER TABLE `acd_item_detail`
-  ADD PRIMARY KEY (`itdt_id`);
-
---
 -- Indexes for table `acd_log`
 --
 ALTER TABLE `acd_log`
@@ -313,7 +293,7 @@ ALTER TABLE `acd_accountant`
 -- AUTO_INCREMENT for table `acd_customer`
 --
 ALTER TABLE `acd_customer`
-  MODIFY `cus_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `cus_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `acd_item`
@@ -322,34 +302,28 @@ ALTER TABLE `acd_item`
   MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
--- AUTO_INCREMENT for table `acd_item_detail`
---
-ALTER TABLE `acd_item_detail`
-  MODIFY `itdt_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
 -- AUTO_INCREMENT for table `acd_log`
 --
 ALTER TABLE `acd_log`
-  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `acd_log_expense`
 --
 ALTER TABLE `acd_log_expense`
-  MODIFY `log_exp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `log_exp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `acd_log_income`
 --
 ALTER TABLE `acd_log_income`
-  MODIFY `log_ic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `log_ic_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `acd_supplier`
 --
 ALTER TABLE `acd_supplier`
-  MODIFY `sup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `sup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -382,7 +382,7 @@
 
         data = '<br><div class="row">'
         data += '<select class="col-md-10 form-control" id="sel3" name="log_ic_item_code[]">'
-        data +=     '{%  for row in rows_acd_item %}'
+        data +=     '{%  for row in rows_acd_item_milk %}'
         data +=         '<option value="{{row.1}}" >{{row.1 + " " + row.2}} </option>'
         data +=     '{% endfor %}'
         data += '</select>'
