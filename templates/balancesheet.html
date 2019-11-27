@@ -139,6 +139,8 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% set sum = namespace(value=0) %}  
+                        {% set temp = namespace(value=0) %}  
                         {%  for row in rows_acd_log %}
                         <tr>
                             <td class="text-center">{{row.0}}</td>
@@ -146,7 +148,17 @@
                             <td class="text-center">{{row.2}}</td>
                             <td class="text-center">{{row.3 * row.4}}</td>
                             <td class="text-center">{{row.3 * row.5}}</td>
-                            <td class="text-center">{{(row.3 * row.4) + (row.3 * row.5)}}</td>
+                            {% if temp.value == 0 %}
+                            <td class="text-center">{{((row.3 * row.4) - (row.3 * row.5))}}</td>
+                            {% set sum.value = ((row.3 * row.4) - (row.3 * row.5)) %}
+                            {% else %}
+                            {% set sum.value = sum.value + ((row.3 * row.4) - (row.3 * row.5)) %}
+                            <td class="text-center">{{sum.value}}</td>
+                            {% endif %}
+                            
+                            
+                            {% set temp.value = 1 %}
+                            
                         </tr>
                         {% endfor %}
                     
